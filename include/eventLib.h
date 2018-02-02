@@ -24,10 +24,6 @@
 #include <pthread.h>
 #include "papiStdEventDefs.h"
 
-
-#include "artico3.h"
-
-
 #define RED    "\033[1;31m"
 #define YELLOW "\033[1;33m"
 #define GREEN  "\033[1;32m"
