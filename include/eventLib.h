@@ -36,7 +36,6 @@ typedef struct papi_action_s {
 	long long *counterValues; //size = eventCodeSetSize
 	char *component_id;
 	int num_counters;
-	unsigned long long time_zero;
 	unsigned long long time_init_action;
 	unsigned long long time_end_action;
 	FILE* papi_output_file;

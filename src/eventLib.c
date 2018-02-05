@@ -10,6 +10,8 @@ pthread_mutex_t lock;
 unsigned long tot_start;
 unsigned long tot_end;
 
+unsigned long long time_zero;
+
 
 void structure_test(papi_action_s *someAction, int eventCodeSetSize, int *eventCodeSet){
     int i;
@@ -107,6 +109,7 @@ void event_init(void) {
         test_fail( __FILE__, __LINE__, "PAPI_thread_init", retval );
 
     printf("event_init done \n");
+    time_zero = PAPI_get_real_usec();
 
     if (pthread_mutex_init(&lock, NULL) != 0)
     {
@@ -134,6 +137,7 @@ void event_init_multiplex(void) {
         test_fail( __FILE__, __LINE__, "PAPI_thread_init", retval );
 
     printf("event_init done \n");
+    time_zero = PAPI_get_real_usec();
 
     if (pthread_mutex_init(&lock, NULL) != 0)
     {
@@ -354,7 +358,6 @@ void event_init_papi_actions(papi_action_s* papi_action, char* componentName, ch
 	snprintf(papi_action[0].component_id, (strlen(componentName)+1) * sizeof(char), "%s", componentName);
 
 	papi_action[0].num_counters = num_events;
-	papi_action[0].time_zero = PAPI_get_real_usec();
 
 	papi_action->papi_eventCodeSet = malloc(sizeof(int) * num_events);
 	papi_action->papi_eventSet = malloc(sizeof(unsigned long) * 1);
@@ -364,12 +367,12 @@ void event_init_papi_actions(papi_action_s* papi_action, char* componentName, ch
 
 void event_start_PAPI_timing(papi_action_s* papi_action){
 	
-	papi_action[0].time_init_action = PAPI_get_real_usec();
+	papi_action[0].time_init_action = PAPI_get_real_usec() - time_zero;
 }
 
 void event_stop_PAPI_timing(papi_action_s* papi_action){
 	
-	papi_action[0].time_end_action = PAPI_get_real_usec();
+	papi_action[0].time_end_action = PAPI_get_real_usec() - time_zero;
 }
 
 void configure_papification(papi_action_s* papi_action, char* componentName, char* actorName, int num_events, char* all_events_name){
