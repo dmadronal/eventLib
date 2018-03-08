@@ -31,16 +31,16 @@
 
 static int TESTS_COLOR = 0;
 
-typedef struct papi_action_s {
+typedef struct papify_action_s {
 	char *action_id;
 	long long *counterValues; //size = eventCodeSetSize
 	char *component_id;
 	int num_counters;
 	unsigned long long time_init_action;
 	unsigned long long time_end_action;
-	FILE* papi_output_file;
-	int* papi_eventCodeSet;
-	unsigned long papi_eventSet;
+	FILE* papify_output_file;
+	int* papify_eventCodeSet;
+	unsigned long papify_eventSet;
 	FILE* eventset_test_file;
 	
-} papi_action_s;
+} papify_action_s;
