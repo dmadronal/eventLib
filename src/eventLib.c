@@ -365,17 +365,17 @@ void event_init_papify_actions(papify_action_s* papify_action, char* componentNa
 	papify_action->papify_output_file = malloc(sizeof(FILE) * 1);
 }
 
-void event_start_PAPIfy_timing(papify_action_s* papify_action){
+void event_start_papify_timing(papify_action_s* papify_action){
 	
 	papify_action[0].time_init_action = PAPI_get_real_usec() - time_zero;
 }
 
-void event_stop_PAPIfy_timing(papify_action_s* papify_action){
+void event_stop_papify_timing(papify_action_s* papify_action){
 	
 	papify_action[0].time_end_action = PAPI_get_real_usec() - time_zero;
 }
 
-void configure_papification(papify_action_s* papify_action, char* componentName, char* actorName, int num_events, char* all_events_name){
+void configure_papify(papify_action_s* papify_action, char* componentName, char* actorName, int num_events, char* all_events_name){
 
 	event_init_papify_actions(papify_action, componentName, actorName, num_events);
 	event_init_output_file(papify_action, actorName, all_events_name);
